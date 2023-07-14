@@ -1,49 +1,23 @@
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Test;
+import java.util.Arrays;
 
-class HairSalonTest {
+public class HairSalon {
 
-    HairSalon hairSalon = new HairSalon();
+    private String[] openingDays = {"Monday", "Tuesday"};
 
-    @Test
-    public void testGetOpeningDays() {
-        String[] expected = { "Monday", "Tuesday" };
-        String[] actualStrings = hairSalon.getOpeningDays();
-
-        assertArrayEquals(expected, actualStrings);
-
+    // This method should return the openingDays array.
+    public String[] getOpeningDays() {
+        return openingDays;
     }
 
-    @Test
-    public void testSalonIsOpenOnMonday() {
-
-        boolean actual = hairSalon.isOpen("Monday");
-        // Could have also just put the method in the brackets instead of creating a
-        // variable actual
-        assertTrue(actual);
-    }
-
-    @Test
-    public void testSalonIsClosedOnWednesday() {
-
-        boolean actual = hairSalon.isOpen("Wednesday");
-
-        assertFalse(actual);
-
-    }
-
-    @Test
-    public void testExceptionIsThrownIfWeekdayDoesNotEndInDay() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> hairSalon.isOpen("Mon"));
-        String expected = "Only weekdays are valid entries.";
-        String actual = exception.getMessage();
-
-        assertEquals(expected, actual);
+    // This method should return true if the weekday passed in is present in the openingDays array.
+    // If not it should return false. If the String passed in does not end in the letters "day",
+    // it should throw an IllegalArgumentException with a message explaining that only weekdays are valid.
+    public boolean isOpen(String weekDay) {
+        if(!weekDay.endsWith("day")){
+            throw new IllegalArgumentException("Only weekdays are valid entries.");
+        }
+        return Arrays.asList(openingDays).contains(weekDay);
     }
 
 }
