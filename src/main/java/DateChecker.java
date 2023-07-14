@@ -18,7 +18,8 @@ public class DateChecker {
     }
 
     public boolean has31Days(Month month) {
-        return false;
+        final String[] monthsWith31Days = {"JANUARY", "MARCH", "MAY", "JULY", "AUGUST", "OCTOBER", "DECEMBER"};
+        return Arrays.asList(monthsWith31Days).contains(month.toString());
     }
 
     
